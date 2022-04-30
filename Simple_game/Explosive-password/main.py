@@ -49,7 +49,7 @@ def guess():
 
     renew_result_frame()
 
-    print(explosive_num)
+    # print(explosive_num)
     try:
         num = int(guess_num.get())
     except: 
