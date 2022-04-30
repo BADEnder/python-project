@@ -5,18 +5,19 @@ import random
 import time 
 
 def start():
-    global left 
-    global right 
+    global left, right
+    global min_input, max_input
+    global result_frame, result_message, explosive_num, guess_num, enter_but, ans_but
+    renew_result_frame()
+    try:
+        left = int(min_input.get())
+        right =int(max_input.get())
+    except:
+        result_message = Label(result_frame, text="You've got to Enter interger!").pack()
 
-    global min_input
-    global max_input
-    global result_frame
-    global result_message
-    global explosive_num
-    global guess_num
-    global enter_but
-
-    if min_input.get() != "" and max_input.get() != "" :
+    if right <= left:
+        result_message = Label(result_frame, text="Maximum must larger than minimum!").pack()
+    else: 
         left = int(min_input.get())
         right =int(max_input.get())
         min_input = Entry(frame, width=15 ,borderwidth=2, state=DISABLED)
@@ -28,13 +29,15 @@ def start():
         result_frame.grid(row=4, column=0, columnspan=4, rowspan=2, pady=10)
         result_message = Label(result_frame, text="Game start! \n The explosive number is between %d ~ %d"%(left,right)).pack()
         explosive_num = random.randint(left+1, right-1) 
+
         guess_num = Entry(frame, width=15, borderwidth=2, state=NORMAL)
         enter_but = Button(frame, text= "Enter", padx=5, pady= 5, command=guess, state=NORMAL)
         guess_num.grid(row=2, column=1,padx=10, pady= 10)
         enter_but.grid(row=2, column=2,padx=10, pady= 10)
-        
-    else :
-        print("something is wrong")
+        ans_but = Button(frame, text="Ans", padx=10, pady=10, state=NORMAL, command=see_answer)
+        ans_but.grid(row=4, column=4)
+        start_but = Button(frame, text="Start", command=start, padx=5, pady=5, state=DISABLED)
+        start_but.grid(row=1, column=4,padx=10, pady= 10)
         
 
 def guess():
@@ -42,7 +45,6 @@ def guess():
     global left
     global right
     global guess_num
-    global result_frame
     global result_message
 
     renew_result_frame()
@@ -68,20 +70,35 @@ def guess():
         enter_but = Button(frame, text= "Enter", padx=5, pady= 5, command=guess, state=DISABLED)
         guess_num.grid(row=2, column=1,padx=10, pady= 10)
         enter_but.grid(row=2, column=2,padx=10, pady= 10)
+        ans_but = Button(frame, text="Ans", padx=10, pady=10, state=DISABLED)
+        ans_but.grid(row=4, column=4)
 def renew_result_frame():
     global result_frame
-
     result_frame = LabelFrame(frame, width=350, height= 100)
     result_frame.grid(row=4, column=0, columnspan=4, rowspan=2, pady=10)
 
 def init_command():
 
-    global min_input, max_input, result_frame, result_message
+    global min_input, max_input, ans_but, start_but
     min_input = Entry(frame, width=15 ,borderwidth=2, state=NORMAL)
     max_input = Entry(frame, width=15 ,borderwidth=2, state=NORMAL)
     min_input.grid(row=1, column=1)
     max_input.grid(row=1, column=3)
     renew_result_frame()
+    ans_but = Button(frame, text="Ans", padx=10, pady=10, state=DISABLED, command=see_answer)
+    ans_but.grid(row=4, column=4)
+    start_but = Button(frame, text="Start", command=start, padx=5, pady=5, state=NORMAL)
+    start_but.grid(row=1, column=4,padx=10, pady= 10)
+def see_answer():
+    global result_message, guess_num, enter_but, ans_but
+
+    renew_result_frame()
+    result_message = Label(result_frame, text="The explosive number is %d\n Nobody lose!\n -----------------------It\'s boring!!!-----------------------"%(explosive_num)).pack()
+    guess_num = Entry(frame, width=15, borderwidth=2, state=DISABLED)
+    enter_but = Button(frame, text= "Enter", padx=5, pady= 5, command=guess, state=DISABLED)
+    enter_but.grid(row=2, column=2,padx=10, pady= 10)
+    ans_but = Button(frame, text="Ans", padx=10, pady=10, state=DISABLED)
+    ans_but.grid(row=4, column=4)
 
 
 app = Tk()
@@ -119,8 +136,8 @@ enter_but = Button(frame, text= "Enter", padx=5, pady= 5, state=DISABLED)
 message_label = Label(frame, text="Message: ")
 result_frame = LabelFrame(frame, width=350, height= 100)
 result_frame.propagate(False)
-init_but = Button(frame, text="Init", padx=10, pady= 10, command=init_command )
-
+init_but = Button(frame, text="Init", padx=10, pady=10, command=init_command )
+ans_but = Button(frame, text="Ans", padx=10, pady=10, state=DISABLED)
 
 # --- Define Position
 # First Position 
@@ -144,7 +161,9 @@ enter_but.grid(row=2, column=2,padx=10, pady= 10)
 # Fourth Position
 message_label.grid(row=3, column=0)
 result_frame.grid(row=4, column=0, columnspan=4, rowspan=2, pady=10)
-init_but.grid(row=4, column=4)
+ans_but.grid(row=4, column=4)
+init_but.grid(row=5, column=4)
+
 
 
 
