@@ -1,21 +1,22 @@
 import random
+import tkinter
 
 
-print('\n'*3)
 
-def UP_game():
 
-    print(('-------------------'*2+'\n')*2)
-    print('Welcome the Ultimate-password game\n')
-    print(('-------------------'*2+'\n')*2)
-    interval_1 = int(input('Tell me what\'s the minimum number that you wanna play: '))
-    interval_2 = int(input('Tell me what\'s the Maximum number that you wanna play: '))
-    #interval 1 is minimum
+def explosive_num():
 
-    print('-------------------------'*1)
-    print('Let\'s get started!!!!!')
-    print('The interval is betwwen', interval_1,'and', interval_2)
-    print('-------------------------'*1)
+    # print(('-------------------'*2+'\n')*2)
+    # print('Welcome the Ultimate-password game\n')
+    # print(('-------------------'*2+'\n')*2)
+    interval_1 = int(input('Minimum number: '))
+    interval_2 = int(input('Maximum number: '))
+
+
+    # print('-------------------------'*1)
+    # print('Let\'s get started!!!!!')
+    # print('The interval is betwwen', interval_1,'and', interval_2)
+    # print('-------------------------'*1)
 
 
     bingo = random.randint(interval_1+1,interval_2-1)
