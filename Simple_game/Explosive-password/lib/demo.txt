@@ -4,4 +4,4 @@ Explosive number:
 
   The explovsive number is going to be in this interval.
 
-  It will explode and you are the loser if you pick the number.
+  It will explode and you lose if you pick the number.
