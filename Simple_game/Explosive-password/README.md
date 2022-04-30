@@ -1,4 +1,4 @@
-Explosive number:
+#Explosive number:
 
   You can set two numbers, one is minumum and other one is maximum.
 
