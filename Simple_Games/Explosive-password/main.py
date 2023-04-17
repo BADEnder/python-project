@@ -39,7 +39,6 @@ def start():
         start_but = Button(frame, text="Start", command=start, padx=5, pady=5, state=DISABLED)
         start_but.grid(row=1, column=4,padx=10, pady= 10)
         
-
 def guess():
     
     global left
@@ -103,7 +102,6 @@ def see_answer():
     enter_but.grid(row=2, column=2,padx=10, pady= 10)
     ans_but = Button(frame, text="Ans", padx=10, pady=10, state=DISABLED)
     ans_but.grid(row=4, column=4)
-
 
 app = Tk()
 app.title("Explosive Number")
