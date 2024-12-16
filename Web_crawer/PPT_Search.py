@@ -11,10 +11,12 @@ def GetData(url, target, num_page):
     })
 
     with req.urlopen(Request) as response :
-        data = response.read().decode('utf-8')
+        data = response.read().decode('utf8')
 
+    # print(data)
     bs4data = bs4.BeautifulSoup(data, 'html.parser')
-    titles = bs4data.find_all('div', class_= 'title')
+    titles = bs4data.find_all('div', attrs={"class": 'title'})
+    # titles = bs4data.find_all('div', class_= 'title')
 
     for title in titles:
         if title.a != None:
